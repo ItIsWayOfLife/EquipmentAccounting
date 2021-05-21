@@ -1,0 +1,5 @@
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Core.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.csprojAssemblyReference.cache
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfo.cs

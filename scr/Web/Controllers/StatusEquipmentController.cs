@@ -4,7 +4,6 @@ using Core.Exceptions;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Web.Models.StatusEquipment;
@@ -135,11 +134,11 @@ namespace Web.Controllers
             if (ModelState.IsValid)
             {
                 var mapper = new MapperConfiguration(cfg => cfg.CreateMap<StatusEquipmentViewModel, StatusEquipment>()).CreateMapper();
-                var author = mapper.Map<StatusEquipmentViewModel, StatusEquipment>(model);
+                var statusEquipment = mapper.Map<StatusEquipmentViewModel, StatusEquipment>(model);
 
                 try
                 {
-                    _statusEquipmentService.Edit(author);
+                    _statusEquipmentService.Edit(statusEquipment);
 
                     return RedirectToAction("Index", new { searchSelectionString, searchString });
                 }
@@ -151,5 +150,6 @@ namespace Web.Controllers
 
             return View(model);
         }
+    
     }
 }

@@ -55,6 +55,8 @@ namespace Web
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
 
             services.AddTransient<IStatusEquipmentService, StatusEquipmentService>();
+            services.AddTransient<IPositionService, PositionService>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
 
             services.AddTransient<IUserHelper, UserHelper>();
 

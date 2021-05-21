@@ -56,13 +56,13 @@
                             }
                         </li>
                         <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("subject"))
+                            @if (Context.Request.Path.ToString().ToLower().Contains("position"))
                             {
-                                <a class="nav-link active" asp-controller="Subject" asp-action="Index">Предметы</a>
+                                <a class="nav-link active" asp-controller="Position" asp-action="Index">Должности</a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-controller="Subject" asp-action="Index">Предметы</a>
+                                <a class="nav-link" asp-controller="Position" asp-action="Index">Должности</a>
                             }
                         </li>
 
@@ -78,13 +78,13 @@
                         </li>
 
                         <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("publisher"))
+                            @if (Context.Request.Path.ToString().ToLower().Contains("department"))
                             {
-                                <a class="nav-link active" asp-controller="Publisher" asp-action="Index">Издатель</a>
+                                <a class="nav-link active" asp-controller="Department" asp-action="Index">Отдел</a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-controller="Publisher" asp-action="Index">Издатель</a>
+                                <a class="nav-link" asp-controller="Department" asp-action="Index">Отдел</a>
                             }
                         </li>
 

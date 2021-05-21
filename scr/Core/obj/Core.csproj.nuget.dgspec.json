@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\Web\\Web.csproj": {}
+    "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\scr\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\Web\\Web.csproj": {
+    "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\scr\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\Web\\Web.csproj",
-        "projectName": "Web",
-        "projectPath": "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\Web\\Web.csproj",
+        "projectUniqueName": "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\scr\\Core\\Core.csproj",
+        "projectName": "Core",
+        "projectPath": "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\scr\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\asus\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\Web\\obj\\",
+        "outputPath": "C:\\Users\\asus\\Desktop\\EquipmentAccounting\\scr\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\asus\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -50,9 +50,6 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

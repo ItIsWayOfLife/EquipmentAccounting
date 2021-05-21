@@ -1,0 +1,43 @@
+﻿@model Web.Models.Users.UserFilterListViewModel
+@{
+    ViewBag.Title = "Пользователи";
+}
+
+<div class="row mb-5 mt-5">
+    <div class="col-12 shadow-lg p-0 bg-white">
+        <div style="width: 120%; margin-left: -10%;" class="card">
+            <div class="card-header">
+                <h3>Пользователи</h3>
+            </div>
+            <div class="card-body">    
+                   <div>
+                        <form method="get">
+                            <label for="searchSelectionString">Поиск:</label>
+                            <select id="searchSelectionString" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString"></select>
+                            <label for="searchString">Значение: </label>
+                            <input id="searchString" name="searchString" asp-for="SearchString" />
+                            <input style="margin-top: -5px;" class="btn btn-sm btn-primary" type="submit" value="Поиск" />
+                            <a style="margin-top: -5px;" class="btn btn-sm btn-danger" asp-action="Index">Обновить</a>
+                            <a class="btn btn-sm btn-success" style="margin-top: -5px;" asp-action="Create"
+                               asp-route-searchSelectionString="@Model.SearchSelectionString"
+                               asp-route-searchString="@Model.SearchString">Добавить пользователя</a>
+                        </form>
+                        <table class="table wrText" style="margin-top: 10px;">
+                            @{
+
+                                <tr><th>Email</th><th>ФИО</th><th>Пол</th><th>Дата рожд.</th><th>Адрес</th><th>Телефон</th><th></th></tr>
+
+                                foreach (var user in Model.ListUsers.Users)
+                                {
+                                    @await Html.PartialAsync("_UserList", user, new ViewDataDictionary(this.ViewData) {
+                                       { "SearchSelectionString", Model.SearchSelectionString },
+                                       { "SearchString", Model.SearchString }
+                                    })
+                                }
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

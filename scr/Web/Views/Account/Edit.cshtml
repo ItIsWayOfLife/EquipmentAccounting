@@ -1,0 +1,83 @@
+﻿@model Web.Models.Account.ProfileViewModel
+
+@{
+    ViewBag.Title = "Редактирование профиля";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div class="row mb-5">
+        <div class="col-6 m-auto">
+            <div class="card m-auto">
+                <div class="card-header">
+                    <h3>Редактирование профиля</h3>
+                </div>
+                <div class="card-body">
+                    <form method="post" autocomplete="off" asp-action="Edit" asp-controller="Account">
+
+                        <input type="hidden" asp-for="Id" />
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="FirstName"></label>
+                            <span class="text-danger" asp-validation-for="FirstName"></span><br />
+                            <input class="form-control" type="text" asp-for="FirstName" />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="SecondName"></label>
+                            <span class="text-danger" asp-validation-for="SecondName"></span><br />
+                            <input class="form-control" type="text" asp-for="SecondName" />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="MiddleName"></label>
+                            <span class="text-danger" asp-validation-for="MiddleName"></span><br />
+                            <input class="form-control" type="text" asp-for="MiddleName" />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="Sex"></label>
+                            <span class="text-danger" asp-validation-for="Sex"></span><br />
+                            <select class="form-control" asp-for="Sex">
+                                <option value="мужской">мужской</option>
+                                <option value="женский">женский</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="DateOfBirth"></label>
+                            <span class="text-danger" asp-validation-for="DateOfBirth"></span><br />
+                            <input class="form-control" type="date" asp-for="DateOfBirth" />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="Address"></label>
+                            <span class="text-danger" asp-validation-for="Address"></span><br />
+                            <input class="form-control" type="text" asp-for="Address" />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="Phone"></label>
+                            <span class="text-danger" asp-validation-for="Phone"></span><br />
+                            <input class="form-control" type="text" asp-for="Phone" />
+                        </div>
+
+                        <div class="form-group col-12">
+                            <label asp-for="Email"></label>
+                            <span class="text-danger" asp-validation-for="Email"></span><br />
+                            <input class="form-control" type="text" asp-for="Email" />
+                        </div><br />
+
+                        <div class="form-group col-12">
+                            <button onclick="if (!confirm('Для правильной работы после изменения адреса электронной почты перезайдите в свою учетную запись')) { return false }" type="submit" class="btn btn-primary">Edit</button>
+                            <a asp-controller="Account" asp-action="Profile" class="btn btn-warning">Назад</a>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

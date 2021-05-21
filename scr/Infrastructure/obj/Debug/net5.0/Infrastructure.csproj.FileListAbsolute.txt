@@ -3,3 +3,16 @@ C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\In
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfoInputs.cache
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.AssemblyInfo.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Infrastructure.deps.json
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Infrastructure.runtimeconfig.json
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Infrastructure.runtimeconfig.dev.json
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Infrastructure.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\ref\Infrastructure.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Infrastructure.pdb
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\bin\Debug\net5.0\Core.pdb
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.csproj.CopyComplete
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\ref\Infrastructure.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.pdb
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Infrastructure\obj\Debug\net5.0\Infrastructure.genruntimeconfig.cache

@@ -1,48 +1,189 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Web</title>
+    <title>@ViewBag.Title</title>
+    <link type="text/css" rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Web</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <img style="width: 50px; height: 50px;" title="Учет оборудования" alt="Учет оборудования" src="~/files/Text-Documents-icon.png">
+            </a>
+            <a class="navbar-brand" href="/">Учет оборудования</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    @if (User.Identity.IsAuthenticated)
+                    {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            @if (Context.Request.Path.ToString().ToLower().Contains("bookaccount"))
+                            {
+                                <a class="nav-link active" asp-controller="BookAccount" asp-action="Index">Учет книг</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="BookAccount" asp-action="Index">Учет книг</a>
+                            }
+                        </li>
+
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("abon"))
+                            {
+                                <a class="nav-link active" asp-controller="Abon" asp-action="Index">Ученики</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Abon" asp-action="Index">Ученики</a>
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            @if (Context.Request.Path.ToString().ToLower().Contains("book") && !Context.Request.Path.ToString().ToLower().Contains("bookaccount"))
+                            {
+                                <a class="nav-link active" asp-controller="Book" asp-action="Index">Книги</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Book" asp-action="Index">Книги</a>
+                            }
                         </li>
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("subject"))
+                            {
+                                <a class="nav-link active" asp-controller="Subject" asp-action="Index">Предметы</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Subject" asp-action="Index">Предметы</a>
+                            }
+                        </li>
+
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("author"))
+                            {
+                                <a class="nav-link active" asp-controller="Author" asp-action="Index">Авторы</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Author" asp-action="Index">Авторы</a>
+                            }
+                        </li>
+
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("publisher"))
+                            {
+                                <a class="nav-link active" asp-controller="Publisher" asp-action="Index">Издатель</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Publisher" asp-action="Index">Издатель</a>
+                            }
+                        </li>
+
+
+                        @if (User.IsInRole("admin"))
+                        {
+                            <li class="nav-item">
+                                @if (Context.Request.Path.ToString().ToLower().Contains("users"))
+                                {
+                                    <a class="nav-link active" asp-controller="Users" asp-action="Index">Пользователи</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" asp-controller="Users" asp-action="Index">Пользователи</a>
+                                }
+                            </li>
+
+                            <li class="nav-item">
+                                @if (Context.Request.Path.ToString().ToLower().Contains("report"))
+                                {
+                                    <a class="nav-link active" asp-controller="Report" asp-action="Index">Отчеты</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link" asp-controller="Report" asp-action="Index">Отчеты</a>
+                                }
+                            </li>
+                        }
+
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("about"))
+                            {
+                                <a class="nav-link active" asp-controller="Home" asp-action="About">О нас</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Home" asp-action="About">О нас</a>
+                            }
+                        </li>
+                    }
+                </ul>
+                <nav>
+                    <ul class="navbar-nav mr-auto">
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item ">
+                                <form method="post" asp-controller="Account" asp-action="Logout">
+                                    <input class="btnLogout nav-link bg-dark " type="submit" value="Выход" />
+                                </form>
+                            </li>
+                            <li class="nav-item">
+                                @if (Context.Request.Path.ToString().ToLower().Contains("profil"))
+                                {
+                                    <a class="nav-link active right" asp-controller="Account" asp-action="Profile">Профиль</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link right" asp-controller="Account" asp-action="Profile">Профиль</a>
+                                }
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                @if (Context.Request.Path.ToString().ToLower().Contains("login"))
+                                {
+                                    <a class="nav-link active right" asp-controller="Account" asp-action="Login">Вход</a>
+                                }
+                                else
+                                {
+                                    <a class="nav-link right" asp-controller="Account" asp-action="Login">Вход</a>
+                                }
+                            </li>
+                        }
                     </ul>
-                </div>
+                </nav>
             </div>
         </nav>
+
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
+    <div style="margin-top: 7%;" class="container mtByHeader">
+        <main>
             @RenderBody()
         </main>
+        <br />
     </div>
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - Web - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <a class="linkPrivacy" asp-controller="Home" asp-action="Privacy"> &copy; 2021 - Учет оборудования - Политика конфедициальности</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
+

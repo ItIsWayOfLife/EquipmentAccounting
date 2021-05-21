@@ -89,3 +89,7 @@ C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\U
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Users\Index.cshtml.g.cs
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Users\_UserList.cshtml.g.cs
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Users\ChangePassword.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Home\About.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\StatusEquipment\Index.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\StatusEquipment\Add.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\StatusEquipment\Edit.cshtml.g.cs

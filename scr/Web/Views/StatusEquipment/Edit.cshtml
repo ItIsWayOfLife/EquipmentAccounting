@@ -1,0 +1,36 @@
+﻿@model Web.Models.StatusEquipment.StatusEquipmentViewModel
+
+@{ ViewBag.Title = "Изменение автора"; }
+
+<div class="row mb-5">
+    <div class="col-6 m-auto">
+        <div class="card m-auto">
+            <div class="card-header">
+                <h3>Изменение автора</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="StatusEquipment" asp-action="Edit"
+                      asp-route-searchSelectionString="@ViewBag.SearchSelectionString" asp-route-searchString="@ViewBag.SearchString"
+                      enctype="multipart/form-data">
+
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <input type="hidden" class="form-control" asp-for="Id" />
+
+                    <div class="form-group col-12">
+                        <label asp-for="Name"></label>
+                        <span class="text-danger" asp-validation-for="Name"></span><br />
+                        <input class="form-control" asp-for="Name" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-primary">Изменить</button>
+                        <a asp-action="Index" class="btn btn-warning"
+                           asp-route-searchSelectionString="@ViewBag.SearchSelectionString"
+                           asp-route-searchString="@ViewBag.SearchString">Назад</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

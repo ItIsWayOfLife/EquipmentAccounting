@@ -1,0 +1,79 @@
+﻿@model Web.Models.StatusEquipment.StatusEquipmentIndexViewModel
+
+@{
+    ViewBag.Title = "Состояние оборудования";
+}
+
+<div class="row mb-5 mt-5">
+    <div class="col-12 shadow-lg p-0 bg-white">
+        <div class="card">
+            <div class="card-header">
+                <h3>Состояние оборудования</h3>
+            </div>
+            <div class="card-body">
+                <div class="container">
+
+                    <form method="get">
+                        <div class="form-inline form-group">
+                            <label class="mr-1" asp-for="SearchSelectionString">Поиск по: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString"></select>
+                            <label class="mr-1" asp-for="SearchString">Значение: </label>
+                            <input class="mr-1" name="searchString" asp-for="SearchString" />
+                            <input class="btn btn-sm btn-primary mr-1" type="submit" value="Поиск" />
+                            <a class="btn btn-sm btn-danger mr-1" asp-action="Index">Обновить</a>
+                            <a class="btn btn-sm btn-success mr-1" asp-action="Add" asp-route-searchSelectionString="@Model.SearchSelectionString"
+                               asp-route-searchString="@Model.SearchString">Добавить cостояние оборудования</a>
+
+                        </div>
+                    </form>
+
+                    @if (Model.StatusEquipmentViewModels.Any())
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Id
+                                </th>
+                                <th>
+                                    Название
+                                </th>
+                                <th>
+
+                                </th>
+                            </tr>
+                            @foreach (var statusEquipment in Model.StatusEquipmentViewModels)
+                            {
+                                <tr>
+                                    <td>@statusEquipment.Id</td>
+                                    <td>@statusEquipment.Name</td>
+                                    <td>
+                                        <form asp-action="Delete"
+                                              asp-route-searchSelectionString="@Model.SearchSelectionString"
+                                              asp-route-searchString="@Model.SearchString"
+                                              asp-route-id="@statusEquipment.Id"
+                                              method="post">
+
+                                            <a class="btn btn-sm btn-light" asp-controller="Book" asp-action="Index" asp-route-searchAuthor="@statusEquipment.Name">К оборудованию</a>
+                                            <a class="btn btn-sm btn-primary" asp-controller="StatusEquipment" asp-action="Edit" asp-route-id="@statusEquipment.Id"
+                                               asp-route-searchSelectionString="@Model.SearchSelectionString"
+                                               asp-route-searchString="@Model.SearchString">Изменить</a>
+                                            <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger">
+                                                Удалить
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <h2 class="text-center text-danger">
+                            Список пуст
+                        </h2>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

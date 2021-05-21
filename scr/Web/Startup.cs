@@ -1,6 +1,8 @@
 using Core.Entities.Identity;
 using Core.Helper;
 using Core.Interfaces;
+using Core.Interfaces.Services;
+using Core.Services;
 using Infrastructure.Data.Entities;
 using Infrastructure.Data.Identity;
 using Infrastructure.Repositories.UnitOfWork;
@@ -51,6 +53,8 @@ namespace Web
 
 
             services.AddTransient<IUnitOfWork, EFUnitOfWork>();
+
+            services.AddTransient<IStatusEquipmentService, StatusEquipmentService>();
 
             services.AddTransient<IUserHelper, UserHelper>();
 

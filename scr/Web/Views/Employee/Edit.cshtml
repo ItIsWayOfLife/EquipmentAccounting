@@ -1,0 +1,71 @@
+﻿@model Web.Models.Employee.EmployeeAddEditViewModel
+
+@{ ViewBag.Title = "Изменение работника"; }
+
+<div class="row mb-5">
+    <div class="col-6 m-auto">
+        <div class="card m-auto">
+            <div class="card-header">
+                <h3>Изменение работника</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Employee" asp-action="Edit"
+                      asp-route-searchSelectionString="@ViewBag.SearchSelectionString" asp-route-searchString="@ViewBag.SearchString"
+                      asp-route-searchDepartment="@ViewBag.SearchDepartment" asp-route-searchPosition="@ViewBag.SearchPosition"
+                      enctype="multipart/form-data">
+
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <input type="hidden" asp-for="EmployeeViewModel.Id" />
+                    <div class="form-group col-12">
+                        <label asp-for="EmployeeViewModel.FullName"></label>
+                        <span class="text-danger" asp-validation-for="EmployeeViewModel.FullName"></span><br />
+                        <input class="form-control" asp-for="EmployeeViewModel.FullName" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EmployeeViewModel.Sex"></label>
+                        <span class="text-danger" asp-validation-for="EmployeeViewModel.Sex"></span><br />
+                        <select class="form-control" asp-for="EmployeeViewModel.Sex">
+                            <option value="мужской">мужской</option>
+                            <option value="женский">женский</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EmployeeViewModel.DateOfBirth"></label>
+                        <span class="text-danger" asp-validation-for="EmployeeViewModel.DateOfBirth"></span><br />
+                        <input class="form-control" type="date" asp-for="EmployeeViewModel.DateOfBirth" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EmployeeViewModel.Phone"></label>
+                        <span class="text-danger" asp-validation-for="EmployeeViewModel.Phone"></span><br />
+                        <input class="form-control" type="number" asp-for="EmployeeViewModel.Phone" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EmployeeViewModel.DepartmentName"></label>
+                        <span class="text-danger" asp-validation-for="EmployeeViewModel.DepartmentName"></span><br />
+                        <select class="form-control" asp-items="Model.DepartmentSelect" asp-for="EmployeeViewModel.DepartmentName"></select>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EmployeeViewModel.PositionName"></label>
+                        <span class="text-danger" asp-validation-for="EmployeeViewModel.PositionName"></span><br />
+                        <select class="form-control" asp-items="Model.PositionSelect" asp-for="EmployeeViewModel.PositionName"></select>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-primary">Изменить</button>
+                        <a asp-action="Index" class="btn btn-warning"
+                           asp-route-searchSelectionString="@ViewBag.SearchSelectionString"
+                           asp-route-searchString="@ViewBag.SearchString"
+                           asp-route-searchDepartment="@ViewBag.SearchDepartment"
+                           asp-route-searchPosition="@ViewBag.SearchPosition">Назад</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

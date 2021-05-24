@@ -6,8 +6,8 @@ namespace Core.Entities
         public int Id { get; set; }
         public string Name { get; set; }
         public string InventoryNumber { get; set; }
-        public int? IdEmployee { get; set; }
-        public int IdStatus { get; set; }
+        public int? EmployeeId { get; set; }
+        public int StatusId { get; set; }
         public Employee Employee { get; set; }
         public StatusEquipment StatusEquipment { get; set; }
         public double Price { get; set; }

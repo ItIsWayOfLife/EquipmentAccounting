@@ -1,3 +1,6 @@
+using Core.Converters;
+using Core.DTOs;
+using Core.Entities;
 using Core.Entities.Identity;
 using Core.Helper;
 using Core.Interfaces;
@@ -57,6 +60,9 @@ namespace Web
             services.AddTransient<IStatusEquipmentService, StatusEquipmentService>();
             services.AddTransient<IPositionService, PositionService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IEmployeeService, EmployeeService>();
+
+            services.AddTransient<IConverter<Employee, EmployeeDTO>, EmployeeConverter>();
 
             services.AddTransient<IUserHelper, UserHelper>();
 

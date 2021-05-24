@@ -1,0 +1,75 @@
+﻿@model Web.Models.Equipment.EquipmentAddEditViewModel
+
+@{ ViewBag.Title = "Изменение Оборудования"; }
+
+<div class="row mb-5">
+    <div class="col-6 m-auto">
+        <div class="card m-auto">
+            <div class="card-header">
+                <h3>Изменение Оборудования</h3>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Equipment" asp-action="Edit"
+                      asp-route-searchSelectionString="@ViewBag.SearchSelectionString" asp-route-searchString="@ViewBag.SearchString"
+                       asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment"  asp-route-searchEmployee="@ViewBag.SearchEmployee"
+                      enctype="multipart/form-data">
+
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+
+                    <input type="hidden" asp-for="EquipmentViewModel.Id" />
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.InventoryNumber"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.InventoryNumber"></span><br />
+                        <input class="form-control" asp-for="EquipmentViewModel.InventoryNumber" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.Name"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.Name"></span><br />
+                        <input class="form-control" asp-for="EquipmentViewModel.Name" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.StatusEquipmentName"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.StatusEquipmentName"></span><br />
+                        <select class="form-control" asp-items="Model.StatusEquipmentsSelect" asp-for="EquipmentViewModel.StatusEquipmentName"></select>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.EmployeeFullName"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.EmployeeFullName"></span><br />
+                        <select class="form-control" asp-items="Model.EmployeeSelect" asp-for="EquipmentViewModel.EmployeeFullName"></select>
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.Price"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.Price"></span><br />
+                        <input class="form-control" type="number" asp-for="EquipmentViewModel.Price" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.Term"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.Term"></span><br />
+                        <input class="form-control" type="number" asp-for="EquipmentViewModel.Term" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.ProcentYear"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.ProcentYear"></span><br />
+                        <input class="form-control" type="number" asp-for="EquipmentViewModel.ProcentYear" />
+                    </div>
+
+                    <div class="form-group col-12">
+                        <button type="submit" class="btn btn-primary">Изменить</button>
+                        <a asp-action="Index" class="btn btn-warning"
+                           asp-route-searchSelectionString="@ViewBag.SearchSelectionString"
+                           asp-route-searchString="@ViewBag.SearchString"
+                             asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment"
+                           asp-route-searchEmployee="@ViewBag.SearchEmployee">Назад</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

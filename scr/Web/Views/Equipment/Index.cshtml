@@ -1,0 +1,120 @@
+﻿@model Web.Models.Equipment.EquipmentIndexViewModel
+
+@{
+    ViewBag.Title = "Оборудование";
+}
+
+<div class="row mb-5 mt-5">
+    <div class="col-12 shadow-lg p-0 bg-white">
+        <div style="width: 130%; margin-left: -15%;" class="card">
+            <div class="card-header">
+                <h3>Оборудование</h3>
+            </div>
+            <div class="card-body">
+                <div>
+
+                    <form method="get">
+                        <div class="form-inline form-group">
+                            <label class="mr-1" asp-for="SearchStatusEquipment">Статус: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchStatusEquipment" asp-items="Model.StatusEquipmentSelect" asp-for="SearchStatusEquipment"></select>
+                            <label class="mr-1" asp-for="SearchEmployee">Работник: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchEmployee" asp-items="Model.EmployeeSelect" asp-for="SearchEmployee"></select>
+                        </div>
+
+                        <div class="form-inline form-group">
+                            <label class="mr-1" asp-for="SearchSelectionString">Поиск по: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchSelectionString" asp-items="Model.SearchSelection" asp-for="SearchSelectionString"></select>
+                            <label class="mr-1" asp-for="SearchString">Значение: </label>
+                            <input class="mr-1" name="searchString" asp-for="SearchString" />
+                            <input class="btn btn-sm btn-primary mr-1" type="submit" value="Поиск" />
+                            <a class="btn btn-sm btn-danger mr-1" asp-action="Index">Обновить</a>
+                            <a class="btn btn-sm btn-success mr-1" asp-action="Add"
+                               asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment"  asp-route-searchEmployee="@Model.SearchEmployee">Добавить оборудование</a>
+
+                        </div>
+                    </form>
+
+                    @if (Model.EquipmentViewModels.Any())
+                    {
+                        <table class="table">
+                            <tr>
+                                <th>
+                                    Код
+                                </th>
+                                <th>
+                                    Инвентарный номер
+                                </th>
+                                <th>
+                                    Название
+                                </th>                             
+                                <th>
+                                    Статус
+                                </th>
+                                <th>
+                                    Первоначальную стоимость
+                                </th>
+                                <th>
+                                    Срок полезного использования
+                                </th>
+                                <th>
+                                    Годовая ставка
+                                </th>
+                                <th>
+                                    Сумма отчислений в месяц
+                                </th>
+                                <th>
+                                    Код сотрудника
+                                </th>
+                                <th>
+                                   Сотрудник
+                                </th>
+
+                                <th>
+
+                                </th>
+                            </tr>
+                            @foreach (var equipment in Model.EquipmentViewModels)
+                            {
+                        <tr>
+                            <td>@equipment.Id</td>
+                            <td>@equipment.InventoryNumber</td>
+                            <td>@equipment.Name</td>
+                            <td>@equipment.StatusEquipmentName</td>
+                            <td>@equipment.Price</td>
+                            <td>@equipment.Term</td>
+                            <td>@equipment.ProcentYear</td>
+                            <td>@equipment.DeductionAmountPerMonth</td>
+                            <td>@equipment.EmployeeId</td>
+                            <td>@equipment.EmployeeFullName</td>
+
+                            <td>
+                                <form asp-action="Delete"
+                                      asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                                      asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                                      asp-route-id="@equipment.Id"
+                                      method="post">
+
+                                    <a class="btn btn-sm btn-primary" asp-controller="Equipment" asp-action="Edit" asp-route-id="@equipment.Id"
+                                       asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                                       asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee">Изменить</a>
+                                    <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger">
+                                        Удалить
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                            }
+                        </table>
+                    }
+                    else
+                    {
+                        <h2 class="text-center text-danger">
+                            Список пуст
+                        </h2>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

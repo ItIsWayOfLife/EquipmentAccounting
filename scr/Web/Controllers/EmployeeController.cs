@@ -192,7 +192,6 @@ namespace Web.Controllers
             });
         }
 
-
         [HttpGet]
         public IActionResult Edit(int id, string searchSelectionString, string searchString, string searchPosition, string searchDepartment)
         {

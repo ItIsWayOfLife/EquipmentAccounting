@@ -25,46 +25,19 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("bookaccount"))
+                            @if (Context.Request.Path.ToString().ToLower().Contains("equipment") && !Context.Request.Path.ToString().ToLower().Contains("statusequipment"))
                             {
-                                <a class="nav-link active" asp-controller="BookAccount" asp-action="Index">Учет книг</a>
+                                <a class="nav-link active" asp-controller="Equipment" asp-action="Index">Оборудование</a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-controller="BookAccount" asp-action="Index">Учет книг</a>
+                                <a class="nav-link" asp-controller="Equipment" asp-action="Index">Оборудование</a>
                             }
                         </li>
 
-                        <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("employee"))
-                            {
-                                <a class="nav-link active" asp-controller="Employee" asp-action="Index">Работники</a>
-                            }
-                            else
-                            {
-                                <a class="nav-link" asp-controller="Employee" asp-action="Index">Работники</a>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("book") && !Context.Request.Path.ToString().ToLower().Contains("bookaccount"))
-                            {
-                                <a class="nav-link active" asp-controller="Book" asp-action="Index">Книги</a>
-                            }
-                            else
-                            {
-                                <a class="nav-link" asp-controller="Book" asp-action="Index">Книги</a>
-                            }
-                        </li>
-                        <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("position"))
-                            {
-                                <a class="nav-link active" asp-controller="Position" asp-action="Index">Должности</a>
-                            }
-                            else
-                            {
-                                <a class="nav-link" asp-controller="Position" asp-action="Index">Должности</a>
-                            }
-                        </li>
+
+
+
 
                         <li class="nav-item">
                             @if (Context.Request.Path.ToString().ToLower().Contains("statusequipment"))
@@ -85,6 +58,27 @@
                             else
                             {
                                 <a class="nav-link" asp-controller="Department" asp-action="Index">Отдел</a>
+                            }
+                        </li>
+
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("position"))
+                            {
+                                <a class="nav-link active" asp-controller="Position" asp-action="Index">Должности</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Position" asp-action="Index">Должности</a>
+                            }
+                        </li>
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("employee"))
+                            {
+                                <a class="nav-link active" asp-controller="Employee" asp-action="Index">Работники</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Employee" asp-action="Index">Работники</a>
                             }
                         </li>
 

@@ -21,7 +21,7 @@ namespace Core.Services
         public void Add(EmployeeDTO model)
         {
             int positionId = GetPositionIdByPositionName(model.PositionName);
-            int departmentId = GetDepartmentByDepartmentName(model.DepartmentName);
+            int departmentId = GetDepartmentIdByDepartmentName(model.DepartmentName);
             
             var employee = _employeeConverter.ConvertDTOToModel(model);
 
@@ -48,7 +48,7 @@ namespace Core.Services
             }
 
             int positionId = GetPositionIdByPositionName(model.PositionName);
-            int departmentId = GetDepartmentByDepartmentName(model.DepartmentName);
+            int departmentId = GetDepartmentIdByDepartmentName(model.DepartmentName);
 
             employee.DateOfBirth = model.DateOfBirth;
             employee.FullName = model.FullName;
@@ -103,7 +103,7 @@ namespace Core.Services
             return positionId.Value;
         }
 
-        private int GetDepartmentByDepartmentName(string departmentName)
+        private int GetDepartmentIdByDepartmentName(string departmentName)
         {
             int? departmentId = Database.Department.Find(p => p.Name == departmentName).FirstOrDefault().Id;
 
@@ -113,6 +113,34 @@ namespace Core.Services
             }
 
             return departmentId.Value;
+        }
+
+        public EmployeeDTO GetIdName(int id)
+        {
+            var employee = Database.Employee.Get(id);
+
+            if (employee == null)
+            {
+                throw new ValidationException("Работник не найден", string.Empty);
+            }
+
+            var employeeDTO = _employeeConverter.ConvertModelToDTO(employee);
+            employeeDTO.FullName = employee.Id.ToString() + '|' + employee.FullName;
+
+            return employeeDTO;
+        }
+
+        public IEnumerable<string> GetAllIdName()
+        {
+            var employees = Database.Employee.GetAll();
+            var employeesNames = new List<string>();
+
+            foreach (var employee in employees)
+            {
+                employeesNames.Add(employee.Id.ToString() +'|' +employee.FullName);
+            }
+
+            return employeesNames;
         }
     }
 }

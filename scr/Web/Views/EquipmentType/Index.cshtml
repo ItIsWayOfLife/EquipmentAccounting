@@ -1,14 +1,14 @@
-﻿@model Web.Models.Department.DepartmentIndexViewModel
+﻿@model Web.Models.EquipmentType.EquipmentTypeIndexViewModel
 
 @{
-    ViewBag.Title = "Отделы";
+    ViewBag.Title = "Виды оборудования";
 }
 
 <div class="row mb-5 mt-5">
     <div class="col-12 shadow-lg p-0 bg-white">
         <div class="card">
             <div class="card-header">
-                <h3>Отделы</h3>
+                <h3>Виды оборудования</h3>
             </div>
             <div class="card-body">
                 <div class="container">
@@ -22,12 +22,12 @@
                             <input class="btn btn-sm btn-primary mr-1" type="submit" value="Поиск" />
                             <a class="btn btn-sm btn-danger mr-1" asp-action="Index">Обновить</a>
                             <a class="btn btn-sm btn-success mr-1" asp-action="Add" asp-route-searchSelectionString="@Model.SearchSelectionString"
-                               asp-route-searchString="@Model.SearchString">Добавить отдел</a>
+                               asp-route-searchString="@Model.SearchString">Добавить вид оборудования</a>
 
                         </div>
                     </form>
 
-                    @if (Model.DepartmentViewModels.Any())
+                    @if (Model.EquipmentTypeViewModel.Any())
                     {
                         <table class="table">
                             <tr>
@@ -41,20 +41,20 @@
 
                                 </th>
                             </tr>
-                            @foreach (var departmentViewModel in Model.DepartmentViewModels)
+                            @foreach (var positionViewModel in Model.EquipmentTypeViewModel)
                             {
                                 <tr>
-                                    <td>@departmentViewModel.Id</td>
-                                    <td>@departmentViewModel.Name</td>
+                                    <td>@positionViewModel.Id</td>
+                                    <td>@positionViewModel.Name</td>
                                     <td>
                                         <form asp-action="Delete"
                                               asp-route-searchSelectionString="@Model.SearchSelectionString"
                                               asp-route-searchString="@Model.SearchString"
-                                              asp-route-id="@departmentViewModel.Id"
+                                              asp-route-id="@positionViewModel.Id"
                                               method="post">
 
-                                            <a class="btn btn-sm btn-light" asp-controller="Book" asp-action="Index" asp-route-searchAuthor="@departmentViewModel.Name">К оборудованию</a>
-                                            <a class="btn btn-sm btn-primary" asp-controller="Department" asp-action="Edit" asp-route-id="@departmentViewModel.Id"
+                                            <a class="btn btn-sm btn-light" asp-controller="EquipmentType" asp-action="Index" asp-route-searchAuthor="@positionViewModel.Name">К оборудованию</a>
+                                            <a class="btn btn-sm btn-primary" asp-controller="EquipmentType" asp-action="Edit" asp-route-id="@positionViewModel.Id"
                                                asp-route-searchSelectionString="@Model.SearchSelectionString"
                                                asp-route-searchString="@Model.SearchString">Изменить</a>
                                             <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger">

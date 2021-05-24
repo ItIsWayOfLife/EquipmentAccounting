@@ -105,3 +105,6 @@ C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\E
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Equipment\Index.cshtml.g.cs
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Equipment\Add.cshtml.g.cs
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Equipment\Edit.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\EquipmentType\Index.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\EquipmentType\Add.cshtml.g.cs
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\EquipmentType\Edit.cshtml.g.cs

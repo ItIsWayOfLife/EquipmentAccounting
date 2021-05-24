@@ -19,6 +19,8 @@
                             <select class="mr-1" style="height: 1.8em;" name="searchStatusEquipment" asp-items="Model.StatusEquipmentSelect" asp-for="SearchStatusEquipment"></select>
                             <label class="mr-1" asp-for="SearchEmployee">Работник: </label>
                             <select class="mr-1" style="height: 1.8em;" name="searchEmployee" asp-items="Model.EmployeeSelect" asp-for="SearchEmployee"></select>
+                            <label class="mr-1" asp-for="SearchEmployee">Вид оборудования: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchEquipmentType" asp-items="Model.EquipmentTypeSelect" asp-for="SearchEquipmentType"></select>
                         </div>
 
                         <div class="form-inline form-group">
@@ -30,7 +32,8 @@
                             <a class="btn btn-sm btn-danger mr-1" asp-action="Index">Обновить</a>
                             <a class="btn btn-sm btn-success mr-1" asp-action="Add"
                                asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
-                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment"  asp-route-searchEmployee="@Model.SearchEmployee">Добавить оборудование</a>
+                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment"  asp-route-searchEmployee="@Model.SearchEmployee"
+                                asp-route-searchEquipmentType="@Model.SearchEquipmentType">Добавить оборудование</a>
 
                         </div>
                     </form>
@@ -47,7 +50,10 @@
                                 </th>
                                 <th>
                                     Название
-                                </th>                             
+                                </th>
+                                <th>
+                                    Вид оборудования
+                                </th>
                                 <th>
                                     Статус
                                 </th>
@@ -64,10 +70,13 @@
                                     Сумма отчислений в месяц
                                 </th>
                                 <th>
+                                  Отдел
+                                </th>
+                                <th>
                                     Код сотрудника
                                 </th>
                                 <th>
-                                   Сотрудник
+                                    Сотрудник
                                 </th>
 
                                 <th>
@@ -80,11 +89,16 @@
                             <td>@equipment.Id</td>
                             <td>@equipment.InventoryNumber</td>
                             <td>@equipment.Name</td>
+                            <td>
+                                @equipment.EquipmentTypeName
+                            </td>
                             <td>@equipment.StatusEquipmentName</td>
                             <td>@equipment.Price</td>
                             <td>@equipment.Term</td>
                             <td>@equipment.ProcentYear</td>
+
                             <td>@equipment.DeductionAmountPerMonth</td>
+                            <td>@equipment.Department</td>
                             <td>@equipment.EmployeeId</td>
                             <td>@equipment.EmployeeFullName</td>
 
@@ -92,12 +106,14 @@
                                 <form asp-action="Delete"
                                       asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
                                       asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                                      asp-route-searchEquipmentType="@Model.SearchEquipmentType"
                                       asp-route-id="@equipment.Id"
                                       method="post">
 
                                     <a class="btn btn-sm btn-primary" asp-controller="Equipment" asp-action="Edit" asp-route-id="@equipment.Id"
                                        asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
-                                       asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee">Изменить</a>
+                                       asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                                       asp-route-searchEquipmentType="@Model.SearchEquipmentType">Изменить</a>
                                     <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger">
                                         Удалить
                                     </button>

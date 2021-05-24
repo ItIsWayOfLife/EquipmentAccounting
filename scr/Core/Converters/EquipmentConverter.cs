@@ -33,7 +33,8 @@ namespace Core.Converters
                 ProcentYear = model.ProcentYear,
                 StatusEquipmentName = model.StatusEquipment.Name,
                 Term = model.Term,
-                DeductionAmountPerMonth = new string(Calculate_Month_Amort(model.Price, model.ProcentYear, model.Term).Take(5).ToArray())
+                DeductionAmountPerMonth = new string(Calculate_Month_Amort(model.Price, model.ProcentYear, model.Term).Take(5).ToArray()),
+                EquipmentTypeName = model.EquipmentType.Name
             };
         }
 

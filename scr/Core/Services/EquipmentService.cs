@@ -14,7 +14,7 @@ namespace Core.Services
     {
         private readonly IConverter<Equipment, EquipmentDTO> _equipmentConverter;
 
-        public EquipmentService(IUnitOfWork uow, 
+        public EquipmentService(IUnitOfWork uow,
             IConverter<Equipment, EquipmentDTO> equipmentConverter) : base(uow)
         {
             _equipmentConverter = equipmentConverter;
@@ -24,11 +24,13 @@ namespace Core.Services
         {
             int employeeId = GetEmployeeIdByEmployeeIdName(model.EmployeeFullName);
             int statusEquipmentId = GetStatusEquipmentIdByStatusEquipmentName(model.StatusEquipmentName);
+            int equipmentTypeId = GetEquipmentTypeIdByEquipmentTypeName(model.EquipmentTypeName);
 
             var equipment = _equipmentConverter.ConvertDTOToModel(model);
 
             equipment.EmployeeId = employeeId;
             equipment.StatusEquipmentId = statusEquipmentId;
+            equipment.EquipmentTypeId = equipmentTypeId;
 
             Database.Equipment.Create(equipment);
             Database.Save();
@@ -51,6 +53,7 @@ namespace Core.Services
 
             int employeeId = GetEmployeeIdByEmployeeIdName(model.EmployeeFullName);
             int statusEquipmentId = GetStatusEquipmentIdByStatusEquipmentName(model.StatusEquipmentName);
+            int equipmentTypeId = GetEquipmentTypeIdByEquipmentTypeName(model.EquipmentTypeName);
 
             equipment.InventoryNumber = model.InventoryNumber;
             equipment.Name = model.Name;
@@ -60,6 +63,7 @@ namespace Core.Services
 
             equipment.EmployeeId = employeeId;
             equipment.StatusEquipmentId = statusEquipmentId;
+            equipment.EquipmentTypeId = equipmentTypeId;
 
             Database.Equipment.Update(equipment);
             Database.Save();
@@ -75,6 +79,8 @@ namespace Core.Services
             }
 
             var equipmentDTO = _equipmentConverter.ConvertModelToDTO(equipment);
+            var departmentId = equipment.Employee.DepartmentId;
+            equipmentDTO.Department = Database.Department.Find(p => p.Id == departmentId).FirstOrDefault().Name;
 
             return equipmentDTO;
         }
@@ -84,10 +90,14 @@ namespace Core.Services
             var equipments = Database.Equipment.GetAll();
 
             var equipmentDTOs = new List<EquipmentDTO>();
+            var departments = Database.Department.GetAll().ToList();
 
             foreach (var equipment in equipments)
             {
-                equipmentDTOs.Add(_equipmentConverter.ConvertModelToDTO(equipment));
+                var equipmentDTO = _equipmentConverter.ConvertModelToDTO(equipment);
+                var departmentId = equipment.Employee.DepartmentId;
+                equipmentDTO.Department = departments.FirstOrDefault(p => p.Id == departmentId).Name;
+                equipmentDTOs.Add(equipmentDTO);          
             }
 
             return equipmentDTOs;
@@ -117,6 +127,18 @@ namespace Core.Services
             }
 
             return employeeId.Value;
+        }
+
+        private int GetEquipmentTypeIdByEquipmentTypeName(string equipmentTypeName)
+        {
+            int? equipmentTypeId = Database.EquipmentType.Find(p => p.Name == equipmentTypeName).FirstOrDefault().Id;
+
+            if (equipmentTypeId == null)
+            {
+                throw new ValidationException($"Не установлен вид оборудования", string.Empty);
+            }
+
+            return equipmentTypeId.Value;
         }
 
     }

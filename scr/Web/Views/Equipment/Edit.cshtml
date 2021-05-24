@@ -11,7 +11,8 @@
             <div class="card-body">
                 <form method="post" asp-controller="Equipment" asp-action="Edit"
                       asp-route-searchSelectionString="@ViewBag.SearchSelectionString" asp-route-searchString="@ViewBag.SearchString"
-                       asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment"  asp-route-searchEmployee="@ViewBag.SearchEmployee"
+                      asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment" asp-route-searchEmployee="@ViewBag.SearchEmployee"
+                      asp-route-searchEquipmentType="@ViewBag.SearchEquipmentType"
                       enctype="multipart/form-data">
 
                     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -43,6 +44,12 @@
                     </div>
 
                     <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.EquipmentTypeName"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.EquipmentTypeName"></span><br />
+                        <select class="form-control" asp-items="Model.EquipmentTypeSelect" asp-for="EquipmentViewModel.EquipmentTypeName"></select>
+                    </div>
+
+                    <div class="form-group col-12">
                         <label asp-for="EquipmentViewModel.Price"></label>
                         <span class="text-danger" asp-validation-for="EquipmentViewModel.Price"></span><br />
                         <input class="form-control" type="number" asp-for="EquipmentViewModel.Price" />
@@ -65,8 +72,9 @@
                         <a asp-action="Index" class="btn btn-warning"
                            asp-route-searchSelectionString="@ViewBag.SearchSelectionString"
                            asp-route-searchString="@ViewBag.SearchString"
-                             asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment"
-                           asp-route-searchEmployee="@ViewBag.SearchEmployee">Назад</a>
+                           asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment"
+                           asp-route-searchEmployee="@ViewBag.SearchEmployee" 
+                           asp-route-searchEquipmentType="@ViewBag.SearchEquipmentType">Назад</a>
                     </div>
                 </form>
             </div>

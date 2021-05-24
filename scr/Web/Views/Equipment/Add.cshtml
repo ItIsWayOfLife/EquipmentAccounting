@@ -11,7 +11,7 @@
             <div class="card-body">
                 <form method="post" asp-controller="Equipment" asp-action="Add"
                       asp-route-searchSelectionString="@ViewBag.SearchSelectionString" asp-route-searchString="@ViewBag.SearchString"
-                      asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment"
+                      asp-route-searchStatusEquipment="@ViewBag.SearchStatusEquipment" asp-route-searchEquipmentType="@ViewBag.SearchEquipmentType"
                       enctype="multipart/form-data">
 
                     <div class="text-danger" asp-validation-summary="ModelOnly"></div>
@@ -41,6 +41,12 @@
                     </div>
 
                     <div class="form-group col-12">
+                        <label asp-for="EquipmentViewModel.EquipmentTypeName"></label>
+                        <span class="text-danger" asp-validation-for="EquipmentViewModel.EquipmentTypeName"></span><br />
+                        <select class="form-control" asp-items="Model.EquipmentTypeSelect" asp-for="EquipmentViewModel.EquipmentTypeName"></select>
+                    </div>
+
+                    <div class="form-group col-12">
                         <label asp-for="EquipmentViewModel.Price"></label>
                         <span class="text-danger" asp-validation-for="EquipmentViewModel.Price"></span><br />
                         <input class="form-control" type="number" asp-for="EquipmentViewModel.Price" />
@@ -64,7 +70,8 @@
                            asp-route-searchSelectionString="@ViewBag.SearchSelectionString"
                            asp-route-searchString="@ViewBag.SearchString"
                            asp-route-searchDepartment="@ViewBag.SearchDepartment"
-                           asp-route-searchPosition="@ViewBag.SearchPosition">Назад</a>
+                           asp-route-searchPosition="@ViewBag.SearchPosition"
+                           asp-route-searchEquipmentType="@ViewBag.SearchEquipmentType">Назад</a>
                     </div>
                 </form>
             </div>

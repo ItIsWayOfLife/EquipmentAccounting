@@ -13,5 +13,8 @@ namespace Web.Models.Equipment
         public string SearchStatusEquipment { get; set; }
         public SelectList EmployeeSelect { get; set; }
         public string SearchEmployee { get; set; }
+        public SelectList EquipmentTypeSelect { get; set; }
+        public string SearchEquipmentType { get; set; }
+        
     }
 }

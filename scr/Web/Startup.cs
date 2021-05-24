@@ -62,7 +62,8 @@ namespace Web
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEquipmentService, EquipmentService>();
-            
+            services.AddTransient<IEquipmentTypeService, EquipmentTypeService>();
+
             services.AddTransient<IConverter<Employee, EmployeeDTO>, EmployeeConverter>();
             services.AddTransient<IConverter<Equipment, EquipmentDTO>, EquipmentConverter>();
 

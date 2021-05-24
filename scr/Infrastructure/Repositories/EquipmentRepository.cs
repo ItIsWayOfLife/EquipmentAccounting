@@ -34,17 +34,20 @@ namespace Infrastructure.Repositories
 
         public IEnumerable<Equipment> Find(Func<Equipment, bool> predicate)
         {
-            return _applicationContext.Equipments.Include(p => p.Employee).Include(p => p.StatusEquipment).Where(predicate).ToList();
+            return _applicationContext.Equipments.Include(p => p.Employee).Include(p => p.StatusEquipment)
+                .Include(p => p.EquipmentType).Where(predicate).ToList();
         }
 
         public Equipment Get(int id)
         {
-            return _applicationContext.Equipments.Include(p => p.Employee).Include(p => p.StatusEquipment).FirstOrDefault(p => p.Id == id);
+            return _applicationContext.Equipments.Include(p => p.Employee).Include(p => p.StatusEquipment).Include(p => p.Employee.Department)
+                .Include(p => p.EquipmentType).FirstOrDefault(p => p.Id == id);
         }
 
         public IEnumerable<Equipment> GetAll()
         {
-            return _applicationContext.Equipments.Include(p => p.Employee).Include(p => p.StatusEquipment);
+            return _applicationContext.Equipments.Include(p => p.Employee).Include(p => p.StatusEquipment)
+                .Include(p => p.EquipmentType);
         }
 
         public void Update(Equipment item)

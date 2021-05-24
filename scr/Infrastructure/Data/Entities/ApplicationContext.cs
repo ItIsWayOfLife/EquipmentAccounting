@@ -16,6 +16,7 @@ namespace Infrastructure.Data.Entities
         public DbSet<Equipment> Equipments { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<StatusEquipment> StatusEquipments { get; set; }
+        public DbSet<EquipmentType> EquipmentTypes { get; set; }
     }
 }
 

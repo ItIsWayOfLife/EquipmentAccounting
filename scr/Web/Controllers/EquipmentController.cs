@@ -20,24 +20,38 @@ namespace Web.Controllers
         public readonly IEquipmentService _equipmentService;
         public readonly IStatusEquipmentService _statusEquipmentService;
         public readonly IEmployeeService _employeeService;
+        public readonly IEquipmentTypeService _equipmentTypeService;
 
         public EquipmentController(IEquipmentService equipmentService,
             IStatusEquipmentService statusEquipmentService,
-            IEmployeeService employeeService)
+            IEmployeeService employeeService,
+            IEquipmentTypeService equipmentTypeService)
         {
             _equipmentService = equipmentService;
             _statusEquipmentService = statusEquipmentService;
             _employeeService = employeeService;
+            _equipmentTypeService = equipmentTypeService;
         }
 
         [HttpGet]
-        public IActionResult Index(string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee)
+        public IActionResult Index(string searchSelectionString, string searchString,
+            string searchStatusEquipment,
+            string searchEmployee,
+            string searchEquipmentType)
         {
             var equipmentDTOs = _equipmentService.GetAll();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<EquipmentDTO, EquipmentViewModel>()).CreateMapper();
             var equipmentViewModels = mapper.Map<IEnumerable<EquipmentDTO>, List<EquipmentViewModel>>(equipmentDTOs);
 
-         
+            // equipmentTypes
+            List<string> equipmentTypes = _equipmentTypeService.GetAllName().ToList();
+            equipmentTypes.Insert(0, "Вид оборудования");
+
+            if (searchEquipmentType != string.Empty && searchEquipmentType != "Вид оборудования" && searchEquipmentType != null)
+            {
+                equipmentViewModels = equipmentViewModels.Where(p => p.EquipmentTypeName == searchEquipmentType).ToList();
+            }
+
             // statusEquipments
             List<string> statusEquipments = _statusEquipmentService.GetAllName().ToList();
             statusEquipments.Insert(0, "Статус");
@@ -56,7 +70,6 @@ namespace Web.Controllers
                 string[] empSearchArray = searchEmployee.Split('|');
                 equipmentViewModels = equipmentViewModels.Where(p => p.EmployeeFullName == empSearchArray[1]).ToList();
             }
-
 
             // list search
             List<string> searchSelection = new List<string>() { "Поиск", "Коду", "Инвентарному номеру", "Названию", "Цене", "Сроку полезного использования", "Годовой ставке", "Сумме отчислений в месяц" };
@@ -131,38 +144,47 @@ namespace Web.Controllers
                 SearchStatusEquipment = searchStatusEquipment,
                 StatusEquipmentSelect = new SelectList(statusEquipments),
                 SearchEmployee = searchEmployee,
-                EmployeeSelect = new SelectList(employees)
+                EmployeeSelect = new SelectList(employees),
+                SearchEquipmentType = searchEquipmentType,
+                EquipmentTypeSelect = new SelectList(equipmentTypes)
             });
         }
 
         [HttpGet]
-        public IActionResult Add(string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee)
+        public IActionResult Add(string searchSelectionString, string searchString, string searchStatusEquipment,
+            string searchEmployee, string searchEquipmentType)
         {
             ViewBag.SearchSelectionString = searchSelectionString;
             ViewBag.SearchString = searchString;
             ViewBag.SearchStatusEquipment = searchStatusEquipment;
             ViewBag.SearchEmployee = searchEmployee;
+            ViewBag.SearchEquipmentType = searchEquipmentType;
 
             // statusEquipments
             List<string> statusEquipments = _statusEquipmentService.GetAllName().ToList();
             // employees
             List<string> employees = _employeeService.GetAllIdName().ToList();
+            // equipmentTypes
+            List<string> equipmentTypes = _equipmentTypeService.GetAllName().ToList();
 
             return View(new EquipmentAddEditViewModel()
             {
                 EquipmentViewModel = new EquipmentViewModel() { },
                 StatusEquipmentsSelect = new SelectList(statusEquipments),
-                EmployeeSelect = new SelectList(employees)
+                EmployeeSelect = new SelectList(employees),
+                EquipmentTypeSelect = new SelectList(equipmentTypes)
             });
         }
 
         [HttpPost]
-        public IActionResult Add(EquipmentAddEditViewModel model, string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee)
+        public IActionResult Add(EquipmentAddEditViewModel model, string searchSelectionString, string searchString, string searchStatusEquipment,
+            string searchEmployee, string searchEquipmentType)
         {
             ViewBag.SearchSelectionString = searchSelectionString;
             ViewBag.SearchString = searchString;
             ViewBag.SearchStatusEquipment = searchStatusEquipment;
             ViewBag.SearchEmployee = searchEmployee;
+            ViewBag.SearchEquipmentType = searchEquipmentType;
 
             if (ModelState.IsValid)
             {
@@ -176,7 +198,8 @@ namespace Web.Controllers
                     Price = model.EquipmentViewModel.Price,
                     ProcentYear = model.EquipmentViewModel.ProcentYear,
                     StatusEquipmentName = model.EquipmentViewModel.StatusEquipmentName,
-                    Term = model.EquipmentViewModel.Term
+                    Term = model.EquipmentViewModel.Term,
+                    EquipmentTypeName = model.EquipmentViewModel.EquipmentTypeName
                 };
 
                 try
@@ -201,15 +224,19 @@ namespace Web.Controllers
             List<string> statusEquipments = _statusEquipmentService.GetAllName().ToList();
             // employees
             List<string> employees = _employeeService.GetAllIdName().ToList();
+            // equipmentTypes
+            List<string> equipmentTypes = _equipmentTypeService.GetAllName().ToList();
 
             model.StatusEquipmentsSelect = new SelectList(statusEquipments);
             model.EmployeeSelect = new SelectList(employees);
+            model.EquipmentTypeSelect = new SelectList(equipmentTypes);
 
             return View(model);
         }
 
         [HttpPost]
-        public IActionResult Delete(int id, string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee)
+        public IActionResult Delete(int id, string searchSelectionString, string searchString, string searchStatusEquipment,
+            string searchEmployee, string searchEquipmentType)
         {
             try
             {
@@ -225,17 +252,19 @@ namespace Web.Controllers
                 searchSelectionString,
                 searchString,
                 searchStatusEquipment,
-                searchEmployee
+                searchEmployee,
+                searchEquipmentType
             });
         }
 
         [HttpGet]
-        public IActionResult Edit(int id, string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee)
+        public IActionResult Edit(int id, string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee, string searchEquipmentType)
         {
             ViewBag.SearchSelectionString = searchSelectionString;
             ViewBag.SearchString = searchString;
             ViewBag.SearchStatusEquipment = searchStatusEquipment;
             ViewBag.SearchEmployee = searchEmployee;
+            ViewBag.SearchEquipmentType = searchEquipmentType;
 
             var equipmentDTO = _equipmentService.Get(id);
 
@@ -248,23 +277,27 @@ namespace Web.Controllers
             List<string> statusEquipments = _statusEquipmentService.GetAllName().ToList();
             // employees
             List<string> employees = _employeeService.GetAllIdName().ToList();
-
+            // equipmentTypes
+            List<string> equipmentTypes = _equipmentTypeService.GetAllName().ToList();
 
             return View(new EquipmentAddEditViewModel()
             {
                 EquipmentViewModel = equipmentViewModel,
                 StatusEquipmentsSelect = new SelectList(statusEquipments),
-                EmployeeSelect = new SelectList(employees)
+                EmployeeSelect = new SelectList(employees),
+                EquipmentTypeSelect = new SelectList(equipmentTypes)
             });
         }
 
         [HttpPost]
-        public IActionResult Edit(EquipmentAddEditViewModel model, string searchSelectionString, string searchString, string searchStatusEquipment, string searchEmployee)
+        public IActionResult Edit(EquipmentAddEditViewModel model, string searchSelectionString, string searchString, string searchStatusEquipment,
+            string searchEmployee, string searchEquipmentType)
         {
             ViewBag.SearchSelectionString = searchSelectionString;
             ViewBag.SearchString = searchString;
             ViewBag.SearchStatusEquipment = searchStatusEquipment;
             ViewBag.SearchEmployee = searchEmployee;
+            ViewBag.SearchEquipmentType = searchEquipmentType;
 
             if (ModelState.IsValid)
             {
@@ -280,7 +313,8 @@ namespace Web.Controllers
                         searchSelectionString,
                         searchString,
                         searchStatusEquipment,
-                        searchEmployee
+                        searchEmployee,
+                        searchEquipmentType
                     });
                 }
                 catch (ValidationException ex)

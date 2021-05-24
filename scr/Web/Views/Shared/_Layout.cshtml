@@ -25,7 +25,8 @@
                     @if (User.Identity.IsAuthenticated)
                     {
                         <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("equipment") && !Context.Request.Path.ToString().ToLower().Contains("statusequipment"))
+                            @if (Context.Request.Path.ToString().ToLower().Contains("equipment") && !Context.Request.Path.ToString().ToLower().Contains("statusequipment") 
+                                && !Context.Request.Path.ToString().ToLower().Contains("equipmenttype"))
                             {
                                 <a class="nav-link active" asp-controller="Equipment" asp-action="Index">Оборудование</a>
                             }
@@ -34,10 +35,6 @@
                                 <a class="nav-link" asp-controller="Equipment" asp-action="Index">Оборудование</a>
                             }
                         </li>
-
-
-
-
 
                         <li class="nav-item">
                             @if (Context.Request.Path.ToString().ToLower().Contains("statusequipment"))
@@ -51,13 +48,24 @@
                         </li>
 
                         <li class="nav-item">
-                            @if (Context.Request.Path.ToString().ToLower().Contains("department"))
+                            @if (Context.Request.Path.ToString().ToLower().Contains("equipmenttype"))
                             {
-                                <a class="nav-link active" asp-controller="Department" asp-action="Index">Отдел</a>
+                                <a class="nav-link active" asp-controller="EquipmentType" asp-action="Index">Виды оборудования</a>
                             }
                             else
                             {
-                                <a class="nav-link" asp-controller="Department" asp-action="Index">Отдел</a>
+                                <a class="nav-link" asp-controller="EquipmentType" asp-action="Index">Виды оборудования</a>
+                            }
+                        </li>
+
+                        <li class="nav-item">
+                            @if (Context.Request.Path.ToString().ToLower().Contains("department"))
+                            {
+                                <a class="nav-link active" asp-controller="Department" asp-action="Index">Отделы</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link" asp-controller="Department" asp-action="Index">Отделы</a>
                             }
                         </li>
 

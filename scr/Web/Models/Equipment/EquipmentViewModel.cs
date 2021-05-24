@@ -26,6 +26,10 @@ namespace Web.Models.Equipment
         [Display(Name = "Статус")]
         public string StatusEquipmentName { get; set; }
 
+        [Required(ErrorMessage = "Укажите вид оборудования")]
+        [Display(Name = "Вид оборудования")]
+        public string EquipmentTypeName { get; set; }
+
         [Required(ErrorMessage = "Укажите первоначальную стоимость")]
         [Display(Name = "Первоначальная стоимость")]
         public double Price { get; set; }
@@ -40,5 +44,11 @@ namespace Web.Models.Equipment
 
         [Display(Name = "Сумма отчислений в месяц")]
         public string DeductionAmountPerMonth { get; set; }
+
+        [Display(Name = "Отдел")]
+        public string Department { get; set; }
+
+
+
     }
 }

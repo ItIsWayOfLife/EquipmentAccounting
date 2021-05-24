@@ -14,10 +14,23 @@ namespace Infrastructure.Repositories.UnitOfWork
         private EquipmentRepository _equipmentRepository;
         private PositionRepository _positionRepository;
         private StatusEquipmentRepository _statusEquipmentRepository;
+        private EquipmentTypeRepository _equipmentTypeRepository;
 
         public EFUnitOfWork(ApplicationContext applicationContext)
         {
             _applicationContext = applicationContext;
+        }
+
+        public IRepository<EquipmentType> EquipmentType
+        {
+            get
+            {
+                if (_equipmentTypeRepository == null)
+                {
+                    _equipmentTypeRepository = new EquipmentTypeRepository(_applicationContext);
+                }
+                return _equipmentTypeRepository;
+            }
         }
 
         public IRepository<Department> Department

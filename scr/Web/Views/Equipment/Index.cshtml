@@ -32,10 +32,20 @@
                             <a class="btn btn-sm btn-danger mr-1" asp-action="Index">Обновить</a>
                             <a class="btn btn-sm btn-success mr-1" asp-action="Add"
                                asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
-                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment"  asp-route-searchEmployee="@Model.SearchEmployee"
-                                asp-route-searchEquipmentType="@Model.SearchEquipmentType">Добавить оборудование</a>
+                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                               asp-route-searchEquipmentType="@Model.SearchEquipmentType">Добавить оборудование</a>
 
                         </div>
+                    </form>
+
+                    <form asp-action="GetExcel"
+                           asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                               asp-route-searchEquipmentType="@Model.SearchEquipmentType"
+                          method="post">
+                        <button onclick="if (!confirm('Вы уверены, что хотите экспртировать данные в Excel?')) { return false }" type="submit" class="btn btn-sm btn-danger">
+                            Экспорт в Excel
+                        </button>
                     </form>
 
                     @if (Model.EquipmentViewModels.Any())
@@ -55,7 +65,7 @@
                                     Вид обор.
                                 </th>
                                 <th>
-                                    Статус
+                                    Сост. оборуд.
                                 </th>
                                 <th>
                                     Перв. стоимость
@@ -70,7 +80,7 @@
                                     Сумм. отчисл. в месяц
                                 </th>
                                 <th>
-                                  Отдел
+                                    Отдел
                                 </th>
                                 <th>
                                     Код сотрудника
@@ -85,47 +95,46 @@
                             </tr>
                             @foreach (var equipment in Model.EquipmentViewModels)
                             {
-                        <tr>
-                            <td>@equipment.Id</td>
-                            <td>@equipment.InventoryNumber</td>
-                            <td>@equipment.Name</td>
-                            <td>
-                                @equipment.EquipmentTypeName
-                            </td>
-                            <td>@equipment.StatusEquipmentName</td>
-                            <td>@equipment.Price</td>
-                            <td>@equipment.Term</td>
-                            <td>@equipment.ProcentYear</td>
+                                <tr>
+                                    <td>@equipment.Id</td>
+                                    <td>@equipment.InventoryNumber</td>
+                                    <td>@equipment.Name</td>
+                                    <td>
+                                        @equipment.EquipmentTypeName
+                                    </td>
+                                    <td>@equipment.StatusEquipmentName</td>
+                                    <td>@equipment.Price</td>
+                                    <td>@equipment.Term</td>
+                                    <td>@equipment.ProcentYear</td>
 
-                            <td>@equipment.DeductionAmountPerMonth</td>
-                            <td>@equipment.Department</td>
-                            <td>@equipment.EmployeeId</td>
-                            <td>@equipment.EmployeeFullName</td>
+                                    <td>@equipment.DeductionAmountPerMonth</td>
+                                    <td>@equipment.Department</td>
+                                    <td>@equipment.EmployeeId</td>
+                                    <td>@equipment.EmployeeFullName</td>
 
-                            <td>
-                                <form asp-action="Delete"
-                                      asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
-                                      asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
-                                      asp-route-searchEquipmentType="@Model.SearchEquipmentType"
-                                      asp-route-id="@equipment.Id"
-                                      method="post">
+                                    <td>
+                                        <form asp-action="Delete"
+                                              asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                                              asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                                              asp-route-searchEquipmentType="@Model.SearchEquipmentType"
+                                              asp-route-id="@equipment.Id"
+                                              method="post">
 
-                                    <a class="btn btn-sm btn-primary" asp-controller="Equipment" asp-action="Edit" asp-route-id="@equipment.Id"
-                                       asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
-                                       asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
-                                       asp-route-searchEquipmentType="@Model.SearchEquipmentType">Изменить</a>
+                                            <a class="btn btn-sm btn-primary" asp-controller="Equipment" asp-action="Edit" asp-route-id="@equipment.Id"
+                                               asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                                               asp-route-searchEquipmentType="@Model.SearchEquipmentType">Изменить</a>
 
-                                   
-                                    <a class="btn btn-sm btn-success mt-1" asp-controller="Employee" asp-action="Index" asp-route-id="@equipment.EmployeeId"
-                                       asp-route-move="@true" asp-route-equipmentId="@equipment.Id"
-                                     >Переместить</a>
-                                  
-                                    <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger mt-1">
-                                        Удалить
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+
+                                            <a class="btn btn-sm btn-success mt-1" asp-controller="Employee" asp-action="Index" asp-route-id="@equipment.EmployeeId"
+                                               asp-route-move="@true" asp-route-equipmentId="@equipment.Id">Переместить</a>
+
+                                            <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger mt-1">
+                                                Удалить
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
                             }
                         </table>
                     }

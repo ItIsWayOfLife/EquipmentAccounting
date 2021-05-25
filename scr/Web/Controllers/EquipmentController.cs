@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ClosedXML.Excel;
 using Core.DTOs;
 using Core.Entities;
 using Core.Exceptions;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Web.Models.Employee;
@@ -15,7 +17,7 @@ using Web.Models.Equipment;
 
 namespace Web.Controllers
 {
-    public class EquipmentController : Controller 
+    public class EquipmentController : Controller
     {
         public readonly IEquipmentService _equipmentService;
         public readonly IStatusEquipmentService _statusEquipmentService;
@@ -35,6 +37,18 @@ namespace Web.Controllers
 
         [HttpGet]
         public IActionResult Index(string searchSelectionString, string searchString,
+            string searchStatusEquipment,
+            string searchEmployee,
+            string searchEquipmentType)
+        {
+           var equipmentIndexViewModel = GetEquipmentIndexViewModel(searchSelectionString,  searchString, searchStatusEquipment,
+             searchEmployee,
+             searchEquipmentType);
+
+            return View(equipmentIndexViewModel);
+        }
+
+        private EquipmentIndexViewModel GetEquipmentIndexViewModel(string searchSelectionString, string searchString,
             string searchStatusEquipment,
             string searchEmployee,
             string searchEquipmentType)
@@ -135,7 +149,7 @@ namespace Web.Controllers
                 }
             }
 
-            return View(new EquipmentIndexViewModel()
+            return new EquipmentIndexViewModel()
             {
                 EquipmentViewModels = equipmentViewModels,
                 SearchSelection = new SelectList(searchSelection),
@@ -147,10 +161,8 @@ namespace Web.Controllers
                 EmployeeSelect = new SelectList(employees),
                 SearchEquipmentType = searchEquipmentType,
                 EquipmentTypeSelect = new SelectList(equipmentTypes)
-            });
+            };
         }
-
-
 
         [HttpGet]
         public IActionResult Add(string searchSelectionString, string searchString, string searchStatusEquipment,
@@ -326,6 +338,64 @@ namespace Web.Controllers
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult GetExcel(string searchSelectionString, string searchString,
+            string searchStatusEquipment,
+            string searchEmployee,
+            string searchEquipmentType)
+        {
+            var models = GetEquipmentIndexViewModel(searchSelectionString, searchString, searchStatusEquipment,
+                searchEmployee, searchEquipmentType).EquipmentViewModels;
+
+            using (var workBook = new XLWorkbook())
+            {
+                var worksheet = workBook.Worksheets.Add("Оборудование");
+                var currentRow = 1;
+
+                worksheet.Cell(currentRow, 1).Value = "Код";
+                worksheet.Cell(currentRow, 2).Value = "Инвентарный номер";
+                worksheet.Cell(currentRow, 3).Value = "Название";
+                worksheet.Cell(currentRow, 4).Value = "Вид оборудования";
+                worksheet.Cell(currentRow, 5).Value = "Состояние оборудования";
+                worksheet.Cell(currentRow, 6).Value = "Первоначальная стоимость";
+                worksheet.Cell(currentRow, 7).Value = "Срок полезного использования";
+                worksheet.Cell(currentRow, 8).Value = "Годовая ставка";
+                worksheet.Cell(currentRow, 9).Value = "Сумма отчислений в месяц";
+                worksheet.Cell(currentRow, 10).Value = "Отдел";
+                worksheet.Cell(currentRow, 11).Value = "Код сотрудника";
+                worksheet.Cell(currentRow, 12).Value = "Сотрудник";
+
+                foreach (var model in models)
+                {
+                    currentRow++;
+                    worksheet.Cell(currentRow, 1).Value = model.Id;
+                    worksheet.Cell(currentRow, 2).Value = model.InventoryNumber;
+                    worksheet.Cell(currentRow, 3).Value = model.Name;
+                    worksheet.Cell(currentRow, 4).Value = model.EquipmentTypeName;
+                    worksheet.Cell(currentRow, 5).Value = model.StatusEquipmentName;
+                    worksheet.Cell(currentRow, 6).Value = model.Price;
+                    worksheet.Cell(currentRow, 7).Value = model.Term;
+                    worksheet.Cell(currentRow, 8).Value = model.ProcentYear;
+                    worksheet.Cell(currentRow, 9).Value = model.DeductionAmountPerMonth;
+                    worksheet.Cell(currentRow, 10).Value = model.Department;
+                    worksheet.Cell(currentRow, 11).Value = model.EmployeeId;
+                    worksheet.Cell(currentRow, 12).Value = model.EmployeeFullName;
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    workBook.SaveAs(stream);
+
+                    var content = stream.ToArray();
+
+                    return File(
+                       content,
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        "Equipments.xlsx");
+                }
+            }
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Web.Models.Equipment
         [Display(Name = "Работник")]
         public string EmployeeFullName { get; set; }
 
-        [Required(ErrorMessage = "Укажите статус")]
-        [Display(Name = "Статус")]
+        [Required(ErrorMessage = "Укажите состояние оборудования")]
+        [Display(Name = "Состояние оборудования")]
         public string StatusEquipmentName { get; set; }
 
         [Required(ErrorMessage = "Укажите вид оборудования")]
@@ -47,8 +47,5 @@ namespace Web.Models.Equipment
 
         [Display(Name = "Отдел")]
         public string Department { get; set; }
-
-
-
     }
 }

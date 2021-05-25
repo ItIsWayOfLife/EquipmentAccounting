@@ -113,3 +113,6 @@ C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\bin\Debug\net5.0\ClosedXML.dll
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\bin\Debug\net5.0\DocumentFormat.OpenXml.dll
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\bin\Debug\net5.0\ExcelNumberFormat.dll
 C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\bin\Debug\net5.0\System.IO.Packaging.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\bin\Debug\net5.0\BouncyCastle.Crypto.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\bin\Debug\net5.0\itextsharp.dll
+C:\Users\asus\Desktop\EquipmentAccounting\scr\Web\obj\Debug\net5.0\Razor\Views\Report\Index.cshtml.g.cs

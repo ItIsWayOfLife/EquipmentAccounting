@@ -1,0 +1,53 @@
+﻿@model Web.Models.Report.ReportIndexViewModel
+
+@{ ViewBag.Title = "Отчёты"; }
+
+<div class="row mb-5">
+
+    <div class="col-12 shadow-lg p-0 bg-white">
+        <div class="card">
+            <div class="card-header">
+                <h3>Отчёты</h3>
+            </div>
+            <div class="card-body">
+                <div class="container">
+
+                    @if (@ViewBag.ExMessage != null)
+                    {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.ExMessage
+                </div>}
+
+                    <form method="post" asp-controller="Report" asp-action="GetReportEquipments">
+                        <h5>Отчёт по оборудованию</h5>
+                        <div class="container">
+                            <label class="mr-1">Состояние оборудования: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchStatusEquipment" asp-items="Model.StatusSelect"></select>
+                            <input class="btn btn-sm btn-success mb-1" type="submit" value="Cоставить" />
+                        </div>
+                    </form>
+
+                    <form method="post" asp-controller="Report" asp-action="GetReportDepartments">
+                        <h5>Отчёт по работника</h5>
+                        <div class="container">
+                            <label class="mr-1">Отделы: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchDepartment" asp-items="Model.DepartmentSelect"></select>
+                            <input class="btn btn-sm btn-success mb-1" type="submit" value="Cоставить" />
+                        </div>
+                    </form>
+
+                    <form method="post" asp-controller="Report" asp-action="GetReportEquipmentsByEmployees">
+                        <h5>Отчёт по работника</h5>
+                        <div class="container">
+                            @*<label class="mr-1">Отделы: </label>
+                            <select class="mr-1" style="height: 1.8em;" name="searchDepartment" asp-items="Model.DepartmentSelect"></select>*@
+                            <input class="btn btn-sm btn-success mb-1" type="submit" value="Cоставить" />
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <br />
+        </div>
+    </div>
+</div>

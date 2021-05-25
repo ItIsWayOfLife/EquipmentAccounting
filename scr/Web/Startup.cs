@@ -63,7 +63,7 @@ namespace Web
             services.AddTransient<IEmployeeService, EmployeeService>();
             services.AddTransient<IEquipmentService, EquipmentService>();
             services.AddTransient<IEquipmentTypeService, EquipmentTypeService>();
-
+            services.AddTransient<IReportService, ReportService>();
             services.AddTransient<IConverter<Employee, EmployeeDTO>, EmployeeConverter>();
             services.AddTransient<IConverter<Equipment, EquipmentDTO>, EquipmentConverter>();
 

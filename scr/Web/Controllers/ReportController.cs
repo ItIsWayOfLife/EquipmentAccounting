@@ -46,7 +46,7 @@ namespace Web.Controllers
 
             // statusEquipments
             List<string> statusEquipments = _statusEquipmentService.GetAllName().ToList();
-            statusEquipments.Insert(0, "Статус");
+            statusEquipments.Insert(0, "Состояние оборудования");
 
             // departments
             List<string> departments = _departmentService.GetAllName().ToList();
@@ -73,7 +73,7 @@ namespace Web.Controllers
             try
             {
 
-                if (searchStatusEquipment == "Статус")
+                if (searchStatusEquipment == "Состояние оборудования")
                 {
                     List<List<string>> reportEquipments = _reportService.GetReportEquipments();
                     string title = "Отчёт оборудования";

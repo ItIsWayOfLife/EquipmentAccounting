@@ -68,9 +68,9 @@ namespace Web.Controllers
 
             // statusEquipments
             List<string> statusEquipments = _statusEquipmentService.GetAllName().ToList();
-            statusEquipments.Insert(0, "Статус");
+            statusEquipments.Insert(0, "Состояние оборудования");
 
-            if (searchStatusEquipment != string.Empty && searchStatusEquipment != "Статус" && searchStatusEquipment != null)
+            if (searchStatusEquipment != string.Empty && searchStatusEquipment != "Состояние оборудования" && searchStatusEquipment != null)
             {
                 equipmentViewModels = equipmentViewModels.Where(p => p.StatusEquipmentName == searchStatusEquipment).ToList();
             }

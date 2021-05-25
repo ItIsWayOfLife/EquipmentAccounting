@@ -28,7 +28,7 @@
                     </form>
 
                     <form method="post" asp-controller="Report" asp-action="GetReportDepartments">
-                        <h5>Отчёт по работника</h5>
+                        <h5>Отчёт по работникам</h5>
                         <div class="container">
                             <label class="mr-1">Отделы: </label>
                             <select class="mr-1" style="height: 1.8em;" name="searchDepartment" asp-items="Model.DepartmentSelect"></select>
@@ -37,7 +37,7 @@
                     </form>
 
                     <form method="post" asp-controller="Report" asp-action="GetReportEquipmentsByEmployees">
-                        <h5>Отчёт по работника</h5>
+                        <h5>Отчёт оборудования по работникам</h5>
                         <div class="container">
                             @*<label class="mr-1">Отделы: </label>
                             <select class="mr-1" style="height: 1.8em;" name="searchDepartment" asp-items="Model.DepartmentSelect"></select>*@

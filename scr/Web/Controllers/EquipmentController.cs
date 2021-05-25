@@ -340,7 +340,7 @@ namespace Web.Controllers
             return View(model);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetExcel(string searchSelectionString, string searchString,
             string searchStatusEquipment,
             string searchEmployee,

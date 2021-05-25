@@ -35,10 +35,15 @@
                                asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
                                asp-route-searchEquipmentType="@Model.SearchEquipmentType">Добавить оборудование</a>
 
+                            <a class="btn btn-sm btn-info mr-1" asp-action="GetExcel"
+                               asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                               asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
+                               asp-route-searchEquipmentType="@Model.SearchEquipmentType">Экспорт в Excel</a>
+
                         </div>
                     </form>
 
-                    <form asp-action="GetExcel"
+                    @*<form class="mt-1 mb-3" asp-action="GetExcel"
                            asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
                                asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
                                asp-route-searchEquipmentType="@Model.SearchEquipmentType"
@@ -46,7 +51,7 @@
                         <button onclick="if (!confirm('Вы уверены, что хотите экспртировать данные в Excel?')) { return false }" type="submit" class="btn btn-sm btn-danger">
                             Экспорт в Excel
                         </button>
-                    </form>
+                    </form>*@
 
                     @if (Model.EquipmentViewModels.Any())
                     {

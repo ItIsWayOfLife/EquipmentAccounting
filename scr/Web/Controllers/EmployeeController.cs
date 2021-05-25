@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Core.DTOs;
+using Core.Entities;
 using Core.Exceptions;
 using Core.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -17,19 +18,34 @@ namespace Web.Controllers
         private readonly IEmployeeService _employeeService;
         private readonly IPositionService _positionService;
         private readonly IDepartmentService _departmentService;
+        private readonly IEquipmentService _equipmentService;
 
         public EmployeeController(IEmployeeService employeeService,
             IPositionService positionService,
-            IDepartmentService departmentService)
+            IDepartmentService departmentService,
+            IEquipmentService equipmentService)
         {
             _employeeService = employeeService;
             _positionService = positionService;
             _departmentService = departmentService;
+            _equipmentService = equipmentService;
         }
 
         [HttpGet]
-        public IActionResult Index(string searchSelectionString, string searchString, string searchPosition, string searchDepartment)
+        public IActionResult Index(string searchSelectionString, string searchString, string searchPosition, string searchDepartment,
+            bool move, int? equipmentId)
         {
+            if (move && equipmentId != null)
+            {
+                ViewBag.Move = true;
+                ViewBag.EquipmentId = equipmentId.Value;
+            }
+            else
+            {
+                ViewBag.Move = false;
+            }    
+
+
             var employees = _employeeService.GetAll();
             var mapper = new MapperConfiguration(cfg => cfg.CreateMap<EmployeeDTO, EmployeeViewModel>()).CreateMapper();
             var employeesViewModels = mapper.Map<IEnumerable<EmployeeDTO>, List<EmployeeViewModel>>(employees);
@@ -94,8 +110,57 @@ namespace Web.Controllers
                 DepartmentSelect = new SelectList(departments),
                 SearchDepartment = searchDepartment,
                 PositionSelect = new SelectList(positions),
-                SearchPosition = searchPosition
+                SearchPosition = searchPosition,
+                Move = move,
+                EquipmentId = equipmentId
             });
+        }
+
+
+        [HttpPost]
+        public IActionResult Move(int id, string searchSelectionString, string searchString, string searchPosition, string searchDepartment, int equipmentId)
+        {
+            var equipment = _equipmentService.Get(equipmentId);
+            var newEmp = _employeeService.Get(id);
+            var newEmpInfoName = newEmp.Id + "|" + newEmp.FullName;
+            string oldEmployeeFullName = equipment.Id +"|" +equipment.EmployeeFullName;
+
+            try
+            {
+                equipment.EmployeeFullName = newEmpInfoName;
+                _equipmentService.Edit(equipment);
+            }
+            catch (ValidationException)
+            {
+                return RedirectToAction("Error", "Home", new { requestId = "400", errorInfo = string.Empty });
+            }
+
+            string oldDepartment = equipment.Department;
+            string newDepartment = newEmp.DepartmentName;
+            string newEmployeeFullName = newEmpInfoName;
+
+            return RedirectToAction("MoveSuccess", new
+            {
+                equipment.Name,
+                equipment.InventoryNumber,
+                oldDepartment,
+                oldEmployeeFullName,
+                newDepartment,
+                newEmployeeFullName
+            });
+        }
+
+        [HttpGet]
+        public IActionResult MoveSuccess(MoveSuccessViewModel model)
+        {
+            ViewBag.Name = model.Name;
+            ViewBag.InventoryNumber = model.InventoryNumber;
+            ViewBag.OldDepartment = model.OldDepartment;
+            ViewBag.OldEmployeeFullName = model.OldEmployeeFullName;
+            ViewBag.NewDepartment = model.NewDepartment;
+            ViewBag.NewEmployeeFullName = model.NewEmployeeFullName;
+
+            return View();
         }
 
         [HttpGet]

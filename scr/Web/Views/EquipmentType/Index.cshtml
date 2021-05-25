@@ -53,7 +53,7 @@
                                               asp-route-id="@positionViewModel.Id"
                                               method="post">
 
-                                            <a class="btn btn-sm btn-light" asp-controller="EquipmentType" asp-action="Index" asp-route-searchAuthor="@positionViewModel.Name">К оборудованию</a>
+                                            <a class="btn btn-sm btn-light" asp-controller="Equipment" asp-action="Index" asp-route-searchEquipmentType="@positionViewModel.Name">К оборудованию</a>
                                             <a class="btn btn-sm btn-primary" asp-controller="EquipmentType" asp-action="Edit" asp-route-id="@positionViewModel.Id"
                                                asp-route-searchSelectionString="@Model.SearchSelectionString"
                                                asp-route-searchString="@Model.SearchString">Изменить</a>

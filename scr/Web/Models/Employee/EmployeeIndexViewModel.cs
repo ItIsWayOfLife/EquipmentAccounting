@@ -13,5 +13,7 @@ namespace Web.Models.Employee
         public string SearchDepartment{ get; set; }
         public SelectList PositionSelect { get; set; }
         public string SearchPosition { get; set; }
+        public bool Move { get; set; }
+        public int? EquipmentId { get; set; }
     }
 }

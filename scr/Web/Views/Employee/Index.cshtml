@@ -84,6 +84,13 @@
                                       asp-route-id="@employee.Id"
                                       method="post">
 
+                                    @{ 
+                                        var fullName = employee.Id + "|" + employee.FullName;
+                                    }
+
+                                    <a class="btn btn-sm btn-light" asp-controller="Equipment" asp-action="Index" asp-route-searchEmployee="@fullName">К оборудованию</a>
+
+
                                     <a class="btn btn-sm btn-primary" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id"
                                        asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
                                        asp-route-searchDepartment="@Model.SearchDepartment" asp-route-searchPosition="@Model.SearchPosition">Изменить</a>
@@ -91,7 +98,19 @@
                                         Удалить
                                     </button>
                                 </form>
-                            </td>
+
+                                @if (ViewBag.Move)
+                                {
+                                    <form asp-action="Move"
+                                          asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
+                                          asp-route-searchDepartment="@Model.SearchDepartment" asp-route-searchPosition="@Model.SearchDepartment"
+                                          asp-route-id="@employee.Id" asp-route-equipmentId="@ViewBag.EquipmentId">
+                                        <button onclick="if (!confirm('Вы уверены, что хотите переместить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger mt-1">
+                                            Назначить
+                                        </button>
+                                    </form>
+                                }
+                                </td>
                         </tr>
                             }
                         </table>

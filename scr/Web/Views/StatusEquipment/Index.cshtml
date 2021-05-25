@@ -52,8 +52,8 @@
                                               asp-route-searchString="@Model.SearchString"
                                               asp-route-id="@statusEquipment.Id"
                                               method="post">
+                                            <a class="btn btn-sm btn-light" asp-controller="Equipment" asp-action="Index" asp-route-searchStatusEquipment="@statusEquipment.Name">К оборудованию</a>
 
-                                            <a class="btn btn-sm btn-light" asp-controller="Book" asp-action="Index" asp-route-searchAuthor="@statusEquipment.Name">К оборудованию</a>
                                             <a class="btn btn-sm btn-primary" asp-controller="StatusEquipment" asp-action="Edit" asp-route-id="@statusEquipment.Id"
                                                asp-route-searchSelectionString="@Model.SearchSelectionString"
                                                asp-route-searchString="@Model.SearchString">Изменить</a>

@@ -150,6 +150,8 @@ namespace Web.Controllers
             });
         }
 
+
+
         [HttpGet]
         public IActionResult Add(string searchSelectionString, string searchString, string searchStatusEquipment,
             string searchEmployee, string searchEquipmentType)

@@ -1,0 +1,26 @@
+﻿@model Web.Models.Employee.EmployeeIndexViewModel
+
+@{
+    ViewBag.Title = "Оборудование";
+}
+
+<div class="row mb-5 mt-5">
+    <div class="col-12 shadow-lg p-0 bg-white">
+        <div style="width: 130%; margin-left: -15%;" class="card">
+            <div class="card-header">
+                <h3>Оборудование</h3>
+            </div>
+            <div class="card-body">
+                <div>
+                    <h2 class="text-success">Оборудование успешно перемещено</h2>
+                    <p>Название: @ViewBag.Name</p>
+                    <p>Инвентарный номер: @ViewBag.InventoryNumber</p>
+                    <p>С отдела: @ViewBag.OldDepartment в отдел: @ViewBag.NewDepartment</p>
+                    <p>Ответственный работник был: @ViewBag.OldEmployeeFullName стал: @ViewBag.NewEmployeeFullName</p>
+                    <a asp-action="Index" asp-controller="Equipment" class="btn btn-success">OK</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

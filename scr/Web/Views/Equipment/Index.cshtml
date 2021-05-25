@@ -46,28 +46,28 @@
                                     Код
                                 </th>
                                 <th>
-                                    Инвентарный номер
+                                    Инвент. ном.
                                 </th>
                                 <th>
                                     Название
                                 </th>
                                 <th>
-                                    Вид оборудования
+                                    Вид обор.
                                 </th>
                                 <th>
                                     Статус
                                 </th>
                                 <th>
-                                    Первоначальную стоимость
+                                    Перв. стоимость
                                 </th>
                                 <th>
-                                    Срок полезного использования
+                                    Срок пол. использ.
                                 </th>
                                 <th>
                                     Годовая ставка
                                 </th>
                                 <th>
-                                    Сумма отчислений в месяц
+                                    Сумм. отчисл. в месяц
                                 </th>
                                 <th>
                                   Отдел
@@ -114,7 +114,13 @@
                                        asp-route-searchSelectionString="@Model.SearchSelectionString" asp-route-searchString="@Model.SearchString"
                                        asp-route-searchStatusEquipment="@Model.SearchStatusEquipment" asp-route-searchEmployee="@Model.SearchEmployee"
                                        asp-route-searchEquipmentType="@Model.SearchEquipmentType">Изменить</a>
-                                    <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger">
+
+                                   
+                                    <a class="btn btn-sm btn-success mt-1" asp-controller="Employee" asp-action="Index" asp-route-id="@equipment.EmployeeId"
+                                       asp-route-move="@true" asp-route-equipmentId="@equipment.Id"
+                                     >Переместить</a>
+                                  
+                                    <button onclick="if (!confirm('Вы уверены, что хотите удалить этот элемент?')) { return false }" type="submit" class="btn btn-sm btn-danger mt-1">
                                         Удалить
                                     </button>
                                 </form>
